@@ -81,7 +81,12 @@ def main(output_csv_path: str) -> None:
         # Get quotes from parsing the pages
         quotes = run_parsing_quotes_with_pagination()
         for quote in quotes:
-            writer.writerow(asdict(quote))
+            quote_dict = asdict(quote)
+
+            # Convert the list to a string that looks like a Python list
+            quote_dict["tags"] = str(quote_dict["tags"])
+
+            writer.writerow(quote_dict)
 
 
 if __name__ == "__main__":
